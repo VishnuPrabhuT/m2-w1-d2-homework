@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Second Web Page</title>
+
+    <link rel="stylesheet" href="demo.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btn").click(function (event) {
+                //Load data from json file to each paragraphs
+                $.getJSON('data.json', function (data) {
+                    $('table').text("");
+                    let caption = `<caption>${data["title"]}</caption>`;
+                    let thead = `<th>${data['heading']}</th>`;
+                    let tbody = "";
+                    let tfoot = `<td>${data['subheadven']}</td>`;
+                    let td = "";
+
+                    for (let i = 1; i <= 4; i++) {
+                        let d = data["head" + i];
+                        thead += `<th>${d}</th>`;
+                    }
+                    thead = `<tr id='showheading'>${thead}</tr>`;
+                    thead = `<thead>${thead}</thead>`;
+
+                    for (let i = 1; i <= 2; i++) {
+                        td = `<td>${data['subheadcal']}</td>`;
+                        for (let i = 1; i <= 4; i++) {
+                            let d = data["cal" + i];
+                            td += `<td>${d}</td>`;
+                        }
+                        tbody = `<tr id='showcalories'>${td}</tr>`;
+
+                        td = `<td>${data['subheadfat']}</td>`;
+                        for (let i = 1; i <= 4; i++) {
+                            let d = data["fat" + i];
+                            td += `<td>${d}</td>`;
+                        }
+                        tbody += `<tr id='showfat'>${td}</tr>`;
+                    }
+                    tbody = `<tbody>${tbody}</tbody>`;
+
+                    for (let i = 1; i <= 4; i++) {
+                        let d = data["ven" + i];
+                        tfoot += `<td>${d}</td>`;
+                    }
+                    tfoot = `<tr id='showven'>${tfoot}</tr>`;
+                    tfoot = `<tfoot>${tfoot}</tfoot>`;
+
+                    $("table").append(`${caption}${thead}${tbody}${tfoot}`);
+                });
+
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <div id="container">
+
+        <header>My Web Site Brand</header>
+        <nav>
+            <ul>
+                <li><a href="js-demo2.html">Home</a></li>
+                <li><a href="js-demo2b.html">About</a></li>
+                <li><a href="js-demo2d.html">Gallery</a></li>
+                <li><a href="js-demo2c.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <h1>My Second Heading</h1>
+            <p>My Second paragraph.</p>
+
+            <table>
+
+            </table>
+
+            <input type="button" id="btn" value="Load Data" style="margin-top:20px;" />
+        </main>
+
+        <footer>&copy; Copyright 2020</footer>
+
+    </div>
+
+</body>
+
+</html>
